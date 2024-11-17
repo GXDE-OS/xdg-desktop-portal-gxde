@@ -150,6 +150,10 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     // The label for the accept button. Mnemonic underlines are allowed.
     const QString &acceptText = parseAcceptLabel(options);
 
+    modal = options.value("modal").toBool();
+    multiple = options.value("multiple").toBool();
+    directory = options.value("directory").toBool();
+
     QStringList nameFilters;
     QStringList mimeTypeFilters;
     QString selectedMimeTypeFilter;
@@ -281,6 +285,7 @@ uint FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
         OptionList optionList = qdbus_cast<OptionList>(options.value(QStringLiteral("choices")));
     }
 
+    modal = options.value("modal").toBool();
     current_name = options.value("current_name").toString();
     current_file = options.value("current_file").toString();
     current_folder = options.value("current_folder").toString();
@@ -341,6 +346,10 @@ uint FileChooserPortal::SaveFiles(const QDBusObjectPath &handle, const QString &
     DECLEAR_PARA(current_folder, toString);
     // An array of file names to be saved. The array and byte arrays are expected to be null-terminated.
     DECLEAR_PARA(files, toStringList);
+
+    modal = options.value("modal").toBool();
+    current_folder = options.value("current_folder").toString();
+    files = options.value("files").toStringList();
 
     QStringList nameFilters;
     QStringList mimeTypeFilters;

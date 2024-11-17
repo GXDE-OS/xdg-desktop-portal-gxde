@@ -1,9 +1,9 @@
-xdg-desktop-portal-gxde (1.0.4) UNRELEASED; urgency=medium
+xdg-desktop-portal-gxde (1.0.5) UNRELEASED; urgency=medium
 
   * 支持 GXDE
-  * 修复保存对话框无法设置默认文件名和默认保存路径的问题
+  * 修复对话框无法设置默认文件名和默认保存路径以及对话框调用错误的问题
 
- -- gfdgd_xi <3025613752@qq.com>  Sun, 17 Nov 2024 11:19:12 +0800
+ -- gfdgd_xi <3025613752@qq.com>  Sun, 17 Nov 2024 16:09:01 +0800
 
 xdg-desktop-portal-gxde (1.0.1) unstable; urgency=medium
 
