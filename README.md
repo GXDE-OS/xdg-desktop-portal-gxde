@@ -1,4 +1,4 @@
-# xdg-desktop-portal-dde
+# xdg-desktop-portal-gxde
 
 A backend implement for xdg-desktop-portal on Deepin desktop environment
 
@@ -56,5 +56,5 @@ Now you can use this project to Debug
 
 ### License
 
-xdg-desktop-portal-dde is licensed under [LGPL-3.0-or-later](LICENSES)
+xdg-desktop-portal-gxde is licensed under [LGPL-3.0-or-later](LICENSES)
 

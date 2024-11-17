@@ -1,9 +1,9 @@
-pkgname=xdg-desktop-portal-dde
+pkgname=xdg-desktop-portal-gxde
 pkgver=1.0
 pkgrel=1.0
 pkgdesc='xdg-desktop-portal backend for deepin'
 arch=('x86_64' 'aarch64')
-url='https://github.com/linuxdeepin/xdg-desktop-portal-dde'
+url='https://github.com/linuxdeepin/xdg-desktop-portal-gxde'
 license=('LGPL3')
 depends=('deepin-qt-dbus-factory-git' 'qt5-base')
 makedepends=('git' 'ninja' 'cmake' 'qt5-tools')

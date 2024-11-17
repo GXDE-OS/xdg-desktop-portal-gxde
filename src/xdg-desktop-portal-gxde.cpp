@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     a.setQuitOnLastWindowClosed(false);
 
     QDBusConnection sessionBus = QDBusConnection::sessionBus();
-    if (sessionBus.registerService(QStringLiteral("org.freedesktop.impl.portal.desktop.dde"))) {
+    if (sessionBus.registerService(QStringLiteral("org.freedesktop.impl.portal.desktop.gxde"))) {
         DDesktopPortal *desktopPortal = new DDesktopPortal(&a);
         if (sessionBus.registerObject(
                 QStringLiteral("/org/freedesktop/portal/desktop"), desktopPortal, QDBusConnection::ExportAdaptors)) {

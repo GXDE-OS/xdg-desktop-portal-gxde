@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: xdg-desktop-portal-dde
-Source: https://github.com/linuxdeepin/xdg-desktop-portal-dde
+Upstream-Name: xdg-desktop-portal-gxde
+Source: https://github.com/linuxdeepin/xdg-desktop-portal-gxde
 
 Files: *
 Copyright: 2017 Deepin Technology Co., Ltd.

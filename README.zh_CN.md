@@ -1,4 +1,4 @@
-# xdg-desktop-portal-dde
+# xdg-desktop-portal-gxde
 
 xdg-desktop-portal 在 Deepin desktop 环境的后端实现
 
@@ -56,5 +56,5 @@ cmake --build build -j$(nproc)
 
 ### License
 
-xdg-desktop-portal-dde 遵循协议 [LGPL-3.0-or-later](LICENSES)
+xdg-desktop-portal-gxde 遵循协议 [LGPL-3.0-or-later](LICENSES)
 

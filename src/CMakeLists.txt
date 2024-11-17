@@ -25,7 +25,7 @@ qt5_add_dbus_interface(NotificationInterface
 
 set(SRC
   ${NotificationInterface}
-  xdg-desktop-portal-dde.cpp
+  xdg-desktop-portal-gxde.cpp
   ddesktopportal.h
   ddesktopportal.cpp
   screenshot.h
