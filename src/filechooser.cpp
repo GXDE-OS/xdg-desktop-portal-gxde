@@ -281,6 +281,10 @@ uint FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
         OptionList optionList = qdbus_cast<OptionList>(options.value(QStringLiteral("choices")));
     }
 
+    current_name = options.value("current_name").toString();
+    current_file = options.value("current_file").toString();
+    current_folder = options.value("current_folder").toString();
+
     QFileDialog fileDialog;
     Utils::setParentWindow(&fileDialog, parent_window);
     auto request = new Request(handle, QVariant(), &fileDialog);
@@ -291,7 +295,7 @@ uint FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
     fileDialog.setAcceptMode(QFileDialog::AcceptSave);
     fileDialog.setConfirmOverwrite(true);
     fileDialog.setDirectory(current_folder);
-    fileDialog.selectFile(current_file);
+    fileDialog.selectFile(current_name);
     fileDialog.setFileMode(QFileDialog::FileMode::ExistingFile);
     if (!acceptText.isEmpty()) {
         fileDialog.setLabelText(QFileDialog::Accept, acceptText);
