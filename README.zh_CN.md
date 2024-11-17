@@ -1,6 +1,6 @@
 # xdg-desktop-portal-gxde
 
-xdg-desktop-portal 在 Deepin desktop 环境的后端实现
+xdg-desktop-portal 在 GXDE desktop 环境的后端实现
 
 ## 接口实现状态
 
