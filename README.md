@@ -1,6 +1,6 @@
 # xdg-desktop-portal-gxde
 
-A backend implement for xdg-desktop-portal on GXDE desktop environment
+A backend implementation for xdg-desktop-portal on GXDE desktop environment
 
 ## Interface Status
 

@@ -3,16 +3,32 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
 #include "ddesktopportal.h"
+#include "wayland/portalwaylandcontext.h"
+#include "wayland/toplevelmodel.h"
+#include "wayland/restoredata.h"
 
 #include <QApplication>
 #include <QDBusConnection>
 #include <qstringliteral.h>
 #include <QLoggingCategory>
+#include <QTranslator>
+#include <QStandardPaths>
+#include <QDBusMetaType>
 
 Q_LOGGING_CATEGORY(XdgDesktopDDE, "xdg-dde")
 
+inline static bool onWayland()
+{
+    return QGuiApplication::platformName() == "wayland";
+}
+
 int main(int argc, char *argv[])
 {
+    // qputenv("PIPEWIRE_DEBUG", "4");
+    // qputenv("QT_LOGGING_RULES", "dde.portal.ScreenCast*.debug=true");
+    // qputenv("WAYLAND_DEBUG", "1");
+    qDBusRegisterMetaType<RestoreData>();
+    qDBusRegisterMetaType<QStringMap>();
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     /* Disable X11 session management
     As XdgDesktopPortal is a QGuiApplication it connects to our X session manager.
@@ -27,17 +43,38 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     a.setQuitOnLastWindowClosed(false);
 
+    QTranslator translator;
+    QString languagePath = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                                  QString("xdg-desktop-portal-gxde/translations"),
+                                                  QStandardPaths::LocateDirectory);
+    if (!translator.load(languagePath+"/xdg-desktop-portal-gxde_" + QLocale::system().name())) {
+        qCWarning(XdgDesktopDDE) << "Failed to load translation file for locale:" << QLocale::system().name();
+    }
+    a.installTranslator(&translator);
+
     QDBusConnection sessionBus = QDBusConnection::sessionBus();
     if (sessionBus.registerService(QStringLiteral("org.freedesktop.impl.portal.desktop.gxde"))) {
-        DDesktopPortal *desktopPortal = new DDesktopPortal(&a);
-        if (sessionBus.registerObject(
-                QStringLiteral("/org/freedesktop/portal/desktop"), desktopPortal, QDBusConnection::ExportAdaptors)) {
-            qCDebug(XdgDesktopDDE) << "portal started";
+        if (onWayland()) {
+            PortalWaylandContext *waylandContext = new PortalWaylandContext(&a);
+            if (sessionBus.registerObject(QStringLiteral("/org/freedesktop/portal/desktop"),
+                                          waylandContext,
+                                          QDBusConnection::ExportAdaptors)) {
+                qCDebug(XdgDesktopDDE) << "portal started on wayland";
+            }
+        } else {
+            DDesktopPortal *desktopPortal = new DDesktopPortal(&a);
+            if (sessionBus.registerObject(QStringLiteral("/org/freedesktop/portal/desktop"),
+                                          desktopPortal,
+                                          QDBusConnection::ExportAdaptors)) {
+                qCDebug(XdgDesktopDDE) << "portal started on x11";
+            }
         }
+
     } else {
         qCDebug(XdgDesktopDDE) << "Another portal is starting";
         return 1;
     }
+
 
     return a.exec();
 }

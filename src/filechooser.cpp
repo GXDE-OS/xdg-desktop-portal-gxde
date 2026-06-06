@@ -147,6 +147,11 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     DECLEAR_PARA_WITH_FALLBACK(multiple, toBool, false);
     // Whether to select for folders instead of files. Default is to select files.
     DECLEAR_PARA_WITH_FALLBACK(directory, toBool, false);
+    // Suggested folder to save the files in. The byte array is expected to be null-terminated.
+    DECLEAR_PARA(current_folder, toByteArray);
+    while (current_folder.endsWith('\0')) {
+        current_folder.chop(1);
+    }
     // The label for the accept button. Mnemonic underlines are allowed.
     const QString &acceptText = parseAcceptLabel(options);
 
@@ -163,13 +168,18 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     parseFilters(options, nameFilters, mimeTypeFilters, allFilters, selectedMimeTypeFilter);
 
     // open directory
+    if (options.contains(QStringLiteral("directory"))) {
+        directory = options.value("directory").toBool();
+    }
+
     if (directory && !options.contains(QStringLiteral("choices"))) {
         QFileDialog dirDialog;
         dirDialog.setWindowTitle(title);
         dirDialog.setModal(modal);
         dirDialog.setFileMode(QFileDialog::Directory);
-        dirDialog.setOptions(QFileDialog::ShowDirsOnly);
+        dirDialog.setOptions(QFileDialog::ShowDirsOnly | QFileDialog::HideNameFilterDetails);
         dirDialog.setSupportedSchemes(QStringList{QStringLiteral("file")});
+        dirDialog.setDirectory(QString::fromLocal8Bit(current_folder));
         if (!acceptText.isEmpty()) {
             dirDialog.setLabelText(QFileDialog::Accept, acceptText);
         }
@@ -200,6 +210,11 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
         OptionList optionList = qdbus_cast<OptionList>(options.value(QStringLiteral("choices")));
         //        optionsWidget.reset(CreateChoiceControls(optionList, checkboxes, comboboxes));
     }
+
+    if (options.contains(QStringLiteral("multiple"))) {
+        multiple = options.value("multiple").toBool();
+    }
+
     QFileDialog fileDialog;
     Utils::setParentWindow(&fileDialog, parent_window);
     auto request = new Request(handle, QVariant(), &fileDialog);
@@ -207,6 +222,8 @@ uint FileChooserPortal::OpenFile(const QDBusObjectPath &handle,
     fileDialog.setWindowTitle(title);
     fileDialog.setModal(modal);
     fileDialog.setFileMode(multiple ? QFileDialog::FileMode::ExistingFiles : QFileDialog::FileMode::ExistingFile);
+    fileDialog.setOptions(QFileDialog::HideNameFilterDetails);
+    fileDialog.setDirectory(QString::fromLocal8Bit(current_folder));
     if (!acceptText.isEmpty()) {
         fileDialog.setLabelText(QFileDialog::Accept, acceptText);
     }
@@ -270,9 +287,12 @@ uint FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
     // A suggested filename.
     DECLEAR_PARA(current_name, toString);
     // A suggested folder to save the file in.
-    DECLEAR_PARA(current_folder, toString);
+    DECLEAR_PARA(current_folder, toByteArray);
+    while (current_folder.endsWith('\0')) {
+        current_folder.chop(1);
+    }
     // The current file (when saving an existing file).
-    DECLEAR_PARA(current_file, toString);
+    DECLEAR_PARA(current_file, toByteArray);
 
     QStringList nameFilters;
     QStringList mimeTypeFilters;
@@ -287,8 +307,8 @@ uint FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
 
     modal = options.value("modal").toBool();
     current_name = options.value("current_name").toString();
-    current_file = options.value("current_file").toString();
-    current_folder = options.value("current_folder").toString();
+    current_file = options.value("current_file").toByteArray();
+    current_folder = options.value("current_folder").toByteArray();
 
     QFileDialog fileDialog;
     Utils::setParentWindow(&fileDialog, parent_window);
@@ -298,9 +318,13 @@ uint FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
     fileDialog.setWindowTitle(title);
     fileDialog.setModal(modal);
     fileDialog.setAcceptMode(QFileDialog::AcceptSave);
-    fileDialog.setConfirmOverwrite(true);
-    fileDialog.setDirectory(current_folder);
-    fileDialog.selectFile(current_name);
+    fileDialog.setOption(QFileDialog::DontConfirmOverwrite, false);
+    fileDialog.setOption(QFileDialog::HideNameFilterDetails, true);
+    fileDialog.setDirectory(QString::fromLocal8Bit(current_folder));
+    if (!current_name.isEmpty())
+        fileDialog.selectFile(current_name);
+    if (!current_file.isEmpty())
+        fileDialog.selectFile(current_file);
     fileDialog.setFileMode(QFileDialog::FileMode::ExistingFile);
     if (!acceptText.isEmpty()) {
         fileDialog.setLabelText(QFileDialog::Accept, acceptText);
@@ -343,12 +367,15 @@ uint FileChooserPortal::SaveFiles(const QDBusObjectPath &handle, const QString &
     const QString &acceptText = parseAcceptLabel(options);
 
     // Suggested folder to save the files in. The byte array is expected to be null-terminated.
-    DECLEAR_PARA(current_folder, toString);
+    DECLEAR_PARA(current_folder, toByteArray);
+    while (current_folder.endsWith('\0')) {
+        current_folder.chop(1);
+    }
     // An array of file names to be saved. The array and byte arrays are expected to be null-terminated.
     DECLEAR_PARA(files, toStringList);
 
     modal = options.value("modal").toBool();
-    current_folder = options.value("current_folder").toString();
+    current_folder = options.value("current_folder").toByteArray();
     files = options.value("files").toStringList();
 
     QStringList nameFilters;
@@ -371,8 +398,9 @@ uint FileChooserPortal::SaveFiles(const QDBusObjectPath &handle, const QString &
     fileDialog.setWindowTitle(title);
     fileDialog.setModal(modal);
     fileDialog.setAcceptMode(QFileDialog::AcceptSave);
-    fileDialog.setConfirmOverwrite(true);
-    fileDialog.setDirectory(current_folder);
+    fileDialog.setOption(QFileDialog::DontConfirmOverwrite, false);
+    fileDialog.setOption(QFileDialog::HideNameFilterDetails, true);
+    fileDialog.setDirectory(QString::fromLocal8Bit(current_folder));
     fileDialog.setFileMode(QFileDialog::FileMode::ExistingFiles);
     if (!acceptText.isEmpty()) {
         fileDialog.setLabelText(QFileDialog::Accept, acceptText);

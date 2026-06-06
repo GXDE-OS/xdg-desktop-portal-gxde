@@ -8,6 +8,7 @@
 #include <QDBusObjectPath>
 #include <qdbusextratypes.h>
 #include <qobjectdefs.h>
+#include <QEvent>
 
 class SettingsPortal : public QDBusAbstractAdaptor
 {
@@ -19,6 +20,7 @@ class SettingsPortal : public QDBusAbstractAdaptor
 public:
     explicit SettingsPortal(QObject *parent);
     ~SettingsPortal() = default;
+    bool eventFilter(QObject *obj, QEvent *event) override;
 
 public slots:
     void ReadAll(const QStringList &groups);
@@ -28,5 +30,6 @@ public slots:
 signals:
     void SettingChanged(const QString &group, const QString &key, const QDBusVariant &value);
 private:
-    QDBusVariant readFdoColorScheme();
+    QDBusVariant readFdoColorScheme() const;
+    QDBusVariant readAccentColor() const ;
 };

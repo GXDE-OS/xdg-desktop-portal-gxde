@@ -1,9 +1,147 @@
-xdg-desktop-portal-gxde (1.0.5) UNRELEASED; urgency=medium
+xdg-desktop-portal-gxde (1.1.3) unstable; urgency=medium
 
-  * 支持 GXDE
-  * 修复对话框无法设置默认文件名和默认保存路径以及对话框调用错误的问题
+  * feat: add qt6-tools-dev to build dependencies
 
- -- gfdgd_xi <3025613752@qq.com>  Sun, 17 Nov 2024 16:09:01 +0800
+ -- zhangkun <zhangkun2@uniontech.com>  Thu, 29 Jan 2026 21:21:14 +0800
+
+xdg-desktop-portal-gxde (1.1.2) unstable; urgency=medium
+
+  * feat: add countdown to access dialog and fix translation generation
+  * feat: add current folder support to file chooser
+  * i18n: Translate xdg-desktop-portal-gxde_en.ts in uk
+  * i18n: Updates for project Deepin Desktop Environment (#100)
+  * fix: button object error
+  * i18n: Updates for project Deepin Desktop Environment (#98)
+
+ -- zhangkun <zhangkun2@uniontech.com>  Thu, 29 Jan 2026 20:38:08 +0800
+
+xdg-desktop-portal-gxde (1.1.1) unstable; urgency=medium
+
+  * i18n: Updates for project Deepin Desktop Environment (#95)
+  * fix: Allow button enabled state error
+  * fix: the func in pipewiretimer was not called
+  * fix(ui): delegate item height error
+
+ -- rewine <luhongxu@uniontech.com>  Fri, 14 Nov 2025 11:32:55 +0800
+
+xdg-desktop-portal-gxde (1.1.0) unstable; urgency=medium
+
+  * fix: close GBM device file descriptor after destroying gbm_device
+  * fix: Treeland may crash during recording
+  * feat: remove unused code
+  * feat: drop screencopy pipewirestream
+  * feat: switch screencast portal to ext-image-capture
+  * feat: support the new ext-image-capture protocol
+  * fix: currentIndex not changing
+  * i18n: Translate xdg-desktop-portal-gxde_en.ts in ru
+  * fix: compatibility with Qt 6.10
+  * feat: get app name from am service
+  * feat: add Tray Control pipewire streaming
+  * feat: remove useless function
+  * fix: var start with uppercase letters
+  * feat: implement a new UI design
+  * feat: add Qt-style implementations for new Wayland protocols
+  * fix: memory access exceptions
+  * fix: delete useless conditional judgments
+
+ -- rewine <luhongxu@uniontech.com>  Thu, 30 Oct 2025 13:48:20 +0800
+
+xdg-desktop-portal-gxde (1.0.15) unstable; urgency=medium
+
+  * fix: memory leaks
+  * chore: use camelCase for PipeWireSourceBuffer and pwBuffer members
+  * feat: Clear pipewiresourcebuffer when removing pw_buffer
+
+ -- rewine <luhongxu@uniontech.com>  Thu, 21 Aug 2025 13:44:55 +0800
+
+xdg-desktop-portal-gxde (1.0.14) unstable; urgency=medium
+
+  * i18n: Translate xdg-desktop-portal-gxde_en.ts in lo (#75)
+  * feat(wayland): initial implementation of screencast portal with
+    PipeWire & DMABuf support
+
+ -- wujiangyu <wujiangyu@uniontech.com>  Tue, 12 Aug 2025 10:40:16 +0800
+
+xdg-desktop-portal-gxde (1.0.13) unstable; urgency=medium
+
+  * fix: modify safe build with debian/rules.
+
+ -- WuJiangYu <wujiangyu@uniontech.com>  Thu, 03 Jul 2025 16:33:06 +0800
+
+xdg-desktop-portal-gxde (1.0.12) unstable; urgency=medium
+
+  * feat: [filechooser] Not show name filter detail info.
+
+ -- gongheng <gongheng@uniontech.com>  Wed, 02 Jul 2025 11:28:34 +0800
+
+xdg-desktop-portal-gxde (1.0.11) unstable; urgency=medium
+
+  * feat: [filechooser] The fileName not show in file chooser dialog.
+
+ -- zhangkun <zhangkun2@uniontech.com>  Thu, 05 Jun 2025 20:53:01 +0800
+
+xdg-desktop-portal-gxde (1.0.10) unstable; urgency=medium
+
+  * fix: improve palette change handling and translation loading
+
+ -- zhangkun <zhangkun2@uniontech.com>  Thu, 29 May 2025 14:47:47 +0800
+
+xdg-desktop-portal-gxde (1.0.9) unstable; urgency=medium
+
+  * fix: add Settings portal interface to dde.portal
+  * i18n: Updates for project Deepin Desktop Environment (#63)
+  * i18n: Updates for project Deepin Desktop Environment (#62)
+  * i18n: Updates for project Deepin Desktop Environment (#57)
+
+ -- YeShanShan <yeshanshan@uniontech.com>  Tue, 13 May 2025 20:57:16 +0800
+
+xdg-desktop-portal-gxde (1.0.8) unstable; urgency=medium
+
+  * fix: crash in Treeland
+
+ -- zhangkun <zhangkun2@uniontech.com>  Thu, 09 Jan 2025 18:58:52 +0800
+
+xdg-desktop-portal-gxde (1.0.7) unstable; urgency=medium
+
+  * fix: modify accessdialog to dtk style
+  * feat: implement interactive captur
+  * fix: 修复调用选择文件对话框时无法选择文件夹
+  * fix: wayland上 chromeium112版本上传文件无法多选
+  * fix: wayland.so is not found (#51)
+
+ -- fuleyi <fuleyi@uniontech.com>  Fri, 01 Nov 2024 08:55:52 +0800
+
+xdg-desktop-portal-gxde (1.0.6) unstable; urgency=medium
+
+  * adapt to new screenshot
+
+ -- Dingyuan Zhang <zhangdingyuan@uniontech.com>  Wed, 26 Jun 2024 18:42:06 +0800
+
+xdg-desktop-portal-gxde (1.0.5) unstable; urgency=medium
+
+  * adapt to new dde-application-manager
+
+ -- linxin <linxin@deepin.org>  Wed, 06 Sep 2023 11:04:06 +0800
+
+xdg-desktop-portal-gxde (1.0.4) unstable; urgency=medium
+
+  * fix the problem of build
+  * remove deprecated function
+  * use dwayland not kwayland
+
+ -- chenhongtao <chenhongtao@deepin.org>  Fri, 9 Jun 2023 16:21:26 +0800
+
+xdg-desktop-portal-gxde (1.0.3) unstable; urgency=medium
+
+  * Release 1.0.3
+
+ -- fanpengcheng <fanpengcheng@uniontech.com>  Thu, 11 May 2023 16:21:26 +0800
+
+xdg-desktop-portal-gxde (1.0.2) unstable; urgency=medium
+
+  * Release 1.0.2
+
+ -- fanpengcheng <fanpengcheng@uniontech.com>  Thu, 11 May 2023 15:21:53 +0800
 
 xdg-desktop-portal-gxde (1.0.1) unstable; urgency=medium
 
