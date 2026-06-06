@@ -1,3 +1,9 @@
+xdg-desktop-portal-gxde (1.1.3gxde1) UNRELEASED; urgency=medium
+
+  * 调整包名
+
+ -- gfdgd_xi <3025613752@qq.com>  Sat, 06 Jun 2026 21:02:27 +0800
+
 xdg-desktop-portal-gxde (1.1.3) unstable; urgency=medium
 
   * feat: add qt6-tools-dev to build dependencies
