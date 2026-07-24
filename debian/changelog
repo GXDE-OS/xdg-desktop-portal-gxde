@@ -1,3 +1,30 @@
+xdg-desktop-portal-gxde (1.1.9) unstable; urgency=medium
+
+  * fix(cmake): fix undefined reference errors in wayland module
+
+ -- zhangkun <zhangkun2@uniontech.com>  Thu, 23 Jul 2026 21:49:55 +0800
+
+xdg-desktop-portal-gxde (1.1.8) unstable; urgency=medium
+
+  * fix(settings): correct D-Bus replies and signatures
+
+ -- zhangkun <zhangkun2@uniontech.com>  Thu, 16 Jul 2026 21:46:48 +0800
+
+xdg-desktop-portal-gxde (1.1.7) unstable; urgency=medium
+
+  * chore: Sync by
+    https://github.com/linuxdeepin/.github/commit/88706fa723e3771211cb07
+    81d3d97fd4a6cd2a68
+  * i18n: Updates for project Deepin Desktop Environment
+
+ -- zhangkun <zhangkun2@uniontech.com>  Thu, 09 Jul 2026 19:29:49 +0800
+
+xdg-desktop-portal-gxde (1.1.6) unstable; urgency=medium
+
+  * feat: enable file chooser portal on Wayland
+
+ -- zhangkun <zhangkun2@uniontech.com>  Wed, 17 Jun 2026 16:17:46 +0800
+
 xdg-desktop-portal-gxde (1.1.5) unstable; urgency=medium
 
   * chore(deps): bump treeland-protocols dependency to >= 0.5.9
@@ -5,13 +32,13 @@ xdg-desktop-portal-gxde (1.1.5) unstable; urgency=medium
 
  -- YaoBing Xiao <xiaoyaobing@uniontech.com>  Tue, 16 Jun 2026 16:33:03 +0800
 
-xdg-desktop-portal-dde (1.1.4) unstable; urgency=medium
+xdg-desktop-portal-gxde (1.1.4) unstable; urgency=medium
 
   * i18n: Updates for project Deepin Desktop Environment (#105)
 
  -- zhangkun <zhangkun2@uniontech.com>  Thu, 11 Jun 2026 19:45:36 +0800
 
-xdg-desktop-portal-dde (1.1.3) unstable; urgency=medium
+xdg-desktop-portal-gxde (1.1.3) unstable; urgency=medium
 
   * feat: add qt6-tools-dev to build dependencies
 
