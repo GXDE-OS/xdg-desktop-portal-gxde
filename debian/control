@@ -31,7 +31,8 @@ Package: xdg-desktop-portal-gxde
 Architecture: any
 Depends:
   ${shlibs:Depends},
-  ${misc:Depends}
+  ${misc:Depends},
+  qml6-module-qtquick-controls2-styles-chameleon
 Description: GXDE poortal backend for xdg-desktop-portal
   xdg-desktop-portal-gxde provide a GXDE implementation for the
   desktop-agnostic xdg-desktop-portal service. This allows sandboxed

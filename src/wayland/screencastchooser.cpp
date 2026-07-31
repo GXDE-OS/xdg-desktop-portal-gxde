@@ -23,16 +23,23 @@ ScreenCastChooser::ScreenCastChooser( const QString &appID, PortalCommon::Source
     });
 
     m_engine->load(QUrl("qrc:/screencast/ScreencastChooserWindow.qml"));
-    QObject *rootObject =  m_engine->rootObjects().first();
-    QQuickWindow* win = qobject_cast<QQuickWindow *>(rootObject);
-
-    if (win) {
-        connect(win, &QQuickWindow::closing, this, &ScreenCastChooser::handleWindowClosed);
-        connect(win, SIGNAL(accept()), this, SLOT(accept()));
-        connect(win, SIGNAL(reject()), this, SLOT(reject()));
-        m_window = win;
-        m_window->setProperty("clientAppName", QVariant::fromValue(AMHelpers::nameFromAM(appID)));
+    if (m_engine->rootObjects().isEmpty()) {
+        qCCritical(SCREENCAST) << "Failed to create screencast chooser window";
+        return;
     }
+
+    QObject *rootObject = m_engine->rootObjects().constFirst();
+    QQuickWindow *win = qobject_cast<QQuickWindow *>(rootObject);
+    if (!win) {
+        qCCritical(SCREENCAST) << "Screencast chooser root object is not a QQuickWindow";
+        return;
+    }
+
+    connect(win, &QQuickWindow::closing, this, &ScreenCastChooser::handleWindowClosed);
+    connect(win, SIGNAL(accept()), this, SLOT(accept()));
+    connect(win, SIGNAL(reject()), this, SLOT(reject()));
+    m_window = win;
+    m_window->setProperty("clientAppName", QVariant::fromValue(AMHelpers::nameFromAM(appID)));
 }
 
 ScreenCastChooser::~ScreenCastChooser()

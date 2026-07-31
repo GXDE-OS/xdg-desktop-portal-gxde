@@ -292,6 +292,12 @@ void ScreencastPortalWayland::Start(const QDBusObjectPath &handle,
     auto screenCastDialog = new ScreenCastChooser(app_id,
                                              session->types(),
                                              this);
+    if (!screenCastDialog->windowHandle()) {
+        qCWarning(SCREENCAST) << "Failed to create screencast chooser";
+        screenCastDialog->deleteLater();
+        replyResponse = PortalResponse::OtherError;
+        return;
+    }
     screenCastDialog->showWindow();
     Utils::setParentWindow(screenCastDialog->windowHandle(), parent_window);
     Request2::makeClosableDialogRequestWithSession(handle, screenCastDialog, session);
