@@ -57,7 +57,6 @@ int main(int argc, char *argv[])
     if (sessionBus.registerService(QStringLiteral("org.freedesktop.impl.portal.desktop.gxde"))) {
         if (onWayland()) {
             PortalWaylandContext *waylandContext = new PortalWaylandContext(&a);
-            new FileChooserPortal(waylandContext);
             if (sessionBus.registerObject(QStringLiteral("/org/freedesktop/portal/desktop"),
                                           waylandContext,
                                           QDBusConnection::ExportAdaptors)) {
