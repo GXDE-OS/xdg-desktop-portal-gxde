@@ -1,3 +1,10 @@
+xdg-desktop-portal-gxde (1.2.1-gxde1) unstable; urgency=medium
+
+  * 修复了Wayland下由于Treeland personal manager v1下因为协议签名变化导致的崩溃（现在协议跟随DTK6而不是自行生成）
+  * 修复了Wayland下选择文件夹失败的问题
+
+ -- CharOfString <root@charofstring.cc>  Fri, 14 Aug 2026 16:54:13 +0800
+
 xdg-desktop-portal-gxde (1.2.0-gxde1) unstable; urgency=medium
 
   * 修复了Wayland下Portal屏幕选择器引发的崩溃
