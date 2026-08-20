@@ -4,6 +4,7 @@
 
 #include "ddesktopportal.h"
 #include "filechooser.h"
+#include "sessiontype.h"
 #include "wayland/portalwaylandcontext.h"
 #include "wayland/toplevelmodel.h"
 #include "wayland/restoredata.h"
@@ -20,7 +21,8 @@ Q_LOGGING_CATEGORY(XdgDesktopDDE, "xdg-dde")
 
 inline static bool onWayland()
 {
-    return QGuiApplication::platformName() == "wayland";
+    return QGuiApplication::platformName().contains(QLatin1String("wayland"),
+                                                    Qt::CaseInsensitive);
 }
 
 int main(int argc, char *argv[])
@@ -30,6 +32,8 @@ int main(int argc, char *argv[])
     // qputenv("WAYLAND_DEBUG", "1");
     qDBusRegisterMetaType<RestoreData>();
     qDBusRegisterMetaType<QStringMap>();
+
+    PortalSession::selectQpaPlatform();
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
     /* Disable X11 session management
     As XdgDesktopPortal is a QGuiApplication it connects to our X session manager.

@@ -36,4 +36,7 @@ configure_file(
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/xdg-desktop-portal-gxde.service DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/systemd/user/")
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.impl.portal.desktop.gxde.service DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/dbus-1/services")
 install(FILES ${CMAKE_CURRENT_LIST_DIR}/misc/gxde.portal DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/xdg-desktop-portal/portals/")
-install(FILES ${CMAKE_CURRENT_LIST_DIR}/misc/gxde-portals.conf DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/xdg-desktop-portal/")
+install(FILES
+  ${CMAKE_CURRENT_LIST_DIR}/misc/deepin-portals.conf
+  ${CMAKE_CURRENT_LIST_DIR}/misc/gxde-portals.conf
+  DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/xdg-desktop-portal/")

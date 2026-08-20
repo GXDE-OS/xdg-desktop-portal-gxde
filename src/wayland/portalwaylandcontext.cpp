@@ -7,6 +7,9 @@
 #include "screencastportal.h"
 #include "filechooser.h"
 #include "wallpaper.h"
+#include "notification.h"
+#include "access.h"
+#include "settings.h"
 
 #include <QGuiApplication>
 #include <qpa/qplatformintegration.h>
@@ -22,6 +25,9 @@ PortalWaylandContext::PortalWaylandContext(QObject *parent)
     , m_screenCopyManager(new ScreenCopyManager(this))
     , m_treelandCaptureManager(new TreeLandCaptureManager(this))
     , m_fileChooser(new FileChooserPortal(this))
+    , m_notification(new NotificationPortal(this))
+    , m_access(new AccessPortal(this))
+    , m_settings(new SettingsPortal(this))
 {
     new ScreenshotPortalWayland(this);
     new ScreencastPortalWayland(this);

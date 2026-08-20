@@ -11,6 +11,9 @@
 #include <private/qwaylanddisplay_p.h>
 
 class FileChooserPortal;
+class NotificationPortal;
+class AccessPortal;
+class SettingsPortal;
 
 class PortalWaylandContext : public QObject, public QDBusContext
 {
@@ -25,4 +28,7 @@ private:
     ScreenCopyManager *m_screenCopyManager;
     TreeLandCaptureManager *m_treelandCaptureManager;
     FileChooserPortal *m_fileChooser;
+    NotificationPortal *m_notification;
+    AccessPortal *m_access;
+    SettingsPortal *m_settings;
 };

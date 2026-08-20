@@ -27,6 +27,7 @@ qt6_add_dbus_interface(NotificationInterface
 set(SRC
     ${NotificationInterface}
     xdg-desktop-portal-gxde.cpp
+    sessiontype.h
     ddesktopportal.h
     ddesktopportal.cpp
     screenshot.h
