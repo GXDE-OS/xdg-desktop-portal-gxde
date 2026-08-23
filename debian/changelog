@@ -1,3 +1,10 @@
+xdg-desktop-portal-gxde (1.2.3-gxde1) unstable; urgency=medium
+
+  * 修复录屏选择界面缺少多语言翻译的问题
+  * 屏幕（显示器）模式默认选中第一个显示器
+
+ -- shenmo <shenmo@spark-app.store>  Sun, 23 Aug 2026 20:46:54 +0800
+
 xdg-desktop-portal-gxde (1.2.2-gxde1) unstable; urgency=medium
 
   * 修复了Wayland下由于传入平台为dcb导致的崩溃
