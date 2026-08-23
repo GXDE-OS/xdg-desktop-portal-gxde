@@ -1,3 +1,18 @@
 .cache
 build
 /CMakeLists.txt.user
+
+# Local build directory
+/obj-*/
+
+# Debian packaging artifacts
+/debian/.debhelper/
+/debian/files
+/debian/*.debhelper.log
+/debian/*.substvars
+/debian/xdg-desktop-portal-gxde/
+
+# Built packages
+*.deb
+*.buildinfo
+*.changes
