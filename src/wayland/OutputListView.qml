@@ -18,6 +18,7 @@ ListView {
         width: view.width
         height: view.itemHeight
         text: screenName
+        checked: index === view.currentIndex
         ButtonGroup.group: doubleExclusiveGroup
         onClicked: view.currentIndex = index
 

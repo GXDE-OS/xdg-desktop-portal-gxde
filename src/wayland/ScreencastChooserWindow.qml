@@ -90,7 +90,7 @@ D.DialogWindow {
                     rightMargin: root.scrollBarMargin
                     model: ScreenListModel {}
                     itemHeight: viewLayout.delegateHeight
-                    currentIndex: -1
+                    currentIndex: 0
                 }
             }
 
