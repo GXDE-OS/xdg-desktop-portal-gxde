@@ -1,5 +1,7 @@
-xdg-desktop-portal-gxde (1.2.3-gxde1) unstable; urgency=medium
+xdg-desktop-portal-gxde (1.2.3-gxde2) unstable; urgency=medium
 
+  * i18n: Translate xdg-desktop-portal-dde_en.ts in ar (#132)
+  * fix(screencast): OBS could not use PipeWire for screen recording
   * 修复录屏选择界面缺少多语言翻译的问题
   * 屏幕（显示器）模式默认选中第一个显示器
 
