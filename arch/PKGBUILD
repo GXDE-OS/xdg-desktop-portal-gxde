@@ -1,0 +1,37 @@
+# Maintainer: CharOfString <root@charofstring.cc>
+pkgname=xdg-desktop-portal-gxde-git
+pkgver=1.2.3
+pkgrel=1
+pkgdesc='xdg-desktop-portal backend for GXDE'
+arch=('x86_64' 'aarch64')
+url="https://github.com/GXDE-OS/xdg-desktop-portal-gxde"
+license=('LGPL-3.0-or-later')
+depends=('xdg-desktop-portal' 'dtk6core-git' 'dtk6widget-git' 'dtk6declarative-git'
+         'qt6-base' 'qt6-declarative' 'qt6-wayland' 'pipewire' 'wayland' 'mesa' 'libdrm'
+         'libgcc' 'libstdc++' 'glibc')
+# treeland-protocols 需要 >= 0.5.9，使用 Arch 官方源的版本
+# treeland-protocols must be >= 0.5.9, the one in the Arch repos is used.
+makedepends=('git' 'cmake' 'ninja' 'qt6-tools' 'wayland-protocols' 'wlr-protocols'
+             'treeland-protocols>=0.5.9')
+provides=("xdg-desktop-portal-gxde=$pkgver" 'xdg-desktop-portal-impl')
+conflicts=('xdg-desktop-portal-gxde')
+source=()
+sha512sums=()
+
+# 直接使用 PKGBUILD 所在的 git 仓库作为源码 ・ Build from the git checkout this PKGBUILD lives in.
+_srcroot() {
+  git -C "$startdir" rev-parse --show-toplevel
+}
+
+build() {
+  cmake -B build -S "$(_srcroot)" -GNinja \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_INSTALL_LIBEXECDIR=lib
+  ninja -C build
+}
+
+package() {
+  DESTDIR="$pkgdir" ninja -C build install
+}
