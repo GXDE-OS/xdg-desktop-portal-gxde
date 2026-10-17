@@ -1,3 +1,9 @@
+xdg-desktop-portal-gxde (1.2.4) UNRELEASED; urgency=medium
+
+  * fix: 修复保存文件夹对话框路径出现%00字符导致无法找到文件夹的问题
+
+ -- gfdgd_xi <3025613752@qq.com>  Sat, 17 Oct 2026 22:43:32 +0800
+
 xdg-desktop-portal-gxde (1.2.3-gxde2) unstable; urgency=medium
 
   * i18n: Translate xdg-desktop-portal-dde_en.ts in ar (#132)
