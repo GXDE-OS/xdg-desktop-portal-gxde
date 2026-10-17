@@ -303,6 +303,9 @@ uint FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
     }
     // The current file (when saving an existing file).
     DECLEAR_PARA(current_file, toByteArray);
+    while (current_file.endsWith('\0')) {
+        current_file.chop(1);
+    }
 
     QStringList nameFilters;
     QStringList mimeTypeFilters;
@@ -314,11 +317,6 @@ uint FileChooserPortal::SaveFile(const QDBusObjectPath &handle,
     if (options.contains(QStringLiteral("choices"))) {
         OptionList optionList = qdbus_cast<OptionList>(options.value(QStringLiteral("choices")));
     }
-
-    modal = options.value("modal").toBool();
-    current_name = options.value("current_name").toString();
-    current_file = options.value("current_file").toByteArray();
-    current_folder = options.value("current_folder").toByteArray();
 
     QFileDialog fileDialog;
     Utils::setParentWindow(&fileDialog, parent_window);
@@ -386,10 +384,6 @@ uint FileChooserPortal::SaveFiles(const QDBusObjectPath &handle, const QString &
     }
     // An array of file names to be saved. The array and byte arrays are expected to be null-terminated.
     DECLEAR_PARA(files, toStringList);
-
-    modal = options.value("modal").toBool();
-    current_folder = options.value("current_folder").toByteArray();
-    files = options.value("files").toStringList();
 
     QStringList nameFilters;
     QStringList mimeTypeFilters;
