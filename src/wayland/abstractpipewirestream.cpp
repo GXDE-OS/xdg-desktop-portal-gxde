@@ -35,6 +35,13 @@
 
 #define DAMAGE_REGION_COUNT 16
 
+// This feature is added in PipeWire 1.2 (missing on Debian 12)
+// The value is part of the wire protocol & older version will ignore it as a
+// unknown flag, so this is safe.
+#ifndef SPA_DATA_FLAG_MAPPABLE
+#define SPA_DATA_FLAG_MAPPABLE (1u<<3)
+#endif
+
 static void randname(char *buf) {
     struct timespec ts;
     clock_gettime(CLOCK_REALTIME, &ts);
@@ -494,7 +501,15 @@ void AbstractPipeWireStream::onStreamAddBuffer(pw_buffer *buffer)
         d[plane].chunk->size = pipeWireSourceBuffer->size[plane];
         d[plane].chunk->stride = pipeWireSourceBuffer->stride[plane];
         d[plane].chunk->offset = pipeWireSourceBuffer->offset[plane];
-        d[plane].flags = 0;
+
+        // P.W. mmaps MemFd buffers on the consumer side w/ protection derived
+        // from these flags, without READABLE the mapping is PORT_NONE and
+        // the client will CRASH!!
+        d[plane].flags = SPA_DATA_FLAG_READWRITE;
+        if (t == SPA_DATA_MemFd) {
+            d[plane].flags |= SPA_DATA_FLAG_MAPPABLE;
+        }
+
         d[plane].fd = pipeWireSourceBuffer->fd[plane];
         d[plane].data = nullptr;
         if (pipeWireSourceBuffer->bufferType == PortalCommon::DMABUF && d[plane].chunk->size == 0) {
