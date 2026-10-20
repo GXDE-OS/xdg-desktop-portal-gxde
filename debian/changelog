@@ -1,3 +1,9 @@
+xdg-desktop-portal-gxde (1.2.5) UNRELEASED; urgency=medium
+
+  * 修复高版本PipeWire在录屏时会导致任何正在使用的录屏客户端崩溃的问题
+
+ -- CharOfString <root@charofstring.cc>  Tue, 20 Oct 2026 08:51:02 -0500
+
 xdg-desktop-portal-gxde (1.2.4) UNRELEASED; urgency=medium
 
   * fix: 修复保存文件夹对话框路径出现%00字符导致无法找到文件夹的问题
